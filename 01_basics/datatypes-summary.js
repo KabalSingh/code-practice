@@ -36,6 +36,30 @@ Primitive :
     }
 
     //console.log(typeof bigNumber);
-    console.log(typeof myFunction);
+    //console.log(typeof myFunction);
     
-    
+
+
+/********************************************************************************************** 
+    Stack(Primitive),Heap(Non-Primitive)
+*/
+
+let youtube="Youtubedotcom"
+
+let anothername=youtube
+anothername="chataurcode"
+
+console.log(youtube);
+console.log(anothername);
+
+let userOne= {
+    email: "user@google.com",
+    upi:"user@ybl"
+}
+
+let userTwo=userOne
+
+userTwo.email="usertwo@google.com"
+
+console.log(userOne.email);
+console.log(userTwo.email);
