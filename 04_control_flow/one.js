@@ -82,12 +82,33 @@ const loggedInFromGoogle=true
 const guestUser=true
 const loggedInFromEmail=true
 
-if(userLoggedIn && debitCard){
-    console.log("Allow to buy course");
+// if(userLoggedIn && debitCard){
+//     console.log("Allow to buy course");
     
-}
+// }
 
-if(loggedInFromEmail || loggedInFromGoogle || guestUser){
-    console.log("User logged in");
+// if(loggedInFromEmail || loggedInFromGoogle || guestUser){
+//     console.log("User logged in");
     
-}
+// }
+
+
+//Nullish Coaliscing Oerator (??): null undefined
+
+let val1
+// val1 =5 ?? 10
+// val1 =null ?? 10
+// val1 =undefined ?? 15
+val1 =null ?? 5 ?? 10
+
+console.log(val1);
+
+
+//Terniary Operator
+
+//condition ? true :false
+
+const teaPrice=50
+
+teaPrice<=80 ? console.log("less than 80") : console.log("more than 40");
+;
