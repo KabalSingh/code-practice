@@ -1,39 +1,90 @@
-const randomNo=parseInt(Math.random()*100+1)
+let randomNo=parseInt(Math.random()*100+1)
 
-const submit= document.querySelector('#subt')
-const userInput = document.querySelector('#guessField')
-const guessSlot= document.querySelector('.gueses')
-const remianing= document.querySelector('.lastResult')
-const lowOrHi= document.querySelector('.lowOrHi')
-const startOver = document.querySelector('.startOver')
+const submit= document.querySelector('#subt');
+const userInput = document.querySelector('#guessField');
+const guessSlot= document.querySelector('.gueses');
+const remianing= document.querySelector('.lastResult');
+const lowOrHi= document.querySelector('.lowOrHi');
+const startOver = document.querySelector('.startOver');
 
 const p = document.createElement('p')
 
-let prevGuess = []
-let numGuess = 1
+let prevGuess = [];
+let numGuess = 1;
 
-let playGame = true
+let playGame = true;
 
-function validGuess(guess) {
-    
+
+if (playGame) {
+    submit.addEventListener('click',function (e) {
+        e.preventDefault();
+        const guess=parseInt(userInput.value);
+        // console.log(guess);
+        validateGuess(guess)
+    })
 }
 
-function chcekGuess(guess) {
-    
+function validateGuess(guess) {
+    if (isNaN(guess)) {
+        alert('please enter a valid number')
+    }else if(guess<1){
+        alert('please enter a number more than 1')
+    }else if(guess>100){
+        alert('please enter a number less than 100')
+    }else{
+        prevGuess.push(guess)
+        if (numGuess === 11) {
+            displayGuess(guess)
+            displayMessage(`Game Over. Random number was ${randomNo}`)
+            endGame()
+        }else{
+            displayGuess(guess)
+            checkGuess(guess)
+        }
+    }
 }
 
-function chcekGuess(guess) {
-    
+function checkGuess(guess) {
+    if (guess === randomNo) {
+        displayMessage(`You guessed it right`)
+    }else if(guess < randomNo){
+        displayMessage(`Number is too low`)
+    }else if (guess>randomNo) {
+        displayMessage(`Number is too high`)
+    }
+}
+
+function displayGuess(guess) {
+    userInput.value=''
+    guessSlot.innerHTML+=`${guess} , `
+    numGuess++;
+    remianing.innerHTML=`${11-numGuess}`
 }
 
 function displayMessage(message) {
-    
+    lowOrHi.innerHTML=`<h2>${message}</h2>`
 }
 
 function newGame() {
-    
+    const newButton=document.querySelector('#newGame')
+    newButton.addEventListener('click',function (e) {
+        randomNo=parseInt(Math.random()*100+1)
+        prevGuess=[]
+        numGuess=1
+        guessSlot.innerHTML=''
+        remianing.innerHTML=`${11-numGuess}`
+        userInput.removeAttribute('disabled')
+        startOver.removeChild(p)
+        playGame=true
+    })
 }
 
 function endGame() {
-    
+    userInput.value=''
+    userInput.setAttribute('disabled')
+    p.classList.add('button')
+    p.innerHTML=`<h2 id="newGame"> Start New Game</h2>`
+    startOver.append(p)
+    playGame=false
+    newGame()
 }
